@@ -1,0 +1,132 @@
+<div class="contact-page animate-fade-in container">
+  <!-- Glow coordinates -->
+  <div class="glow-spot" style="top: 15%; left: 10%;"></div>
+  <div class="glow-spot-teal" style="bottom: 15%; right: 10%;"></div>
+
+  <!-- Page Header -->
+  <header class="contact-header section-padding">
+    <span class="badge">Connection</span>
+    <h1>Connect With Elsewhere</h1>
+    <p class="contact-lead">Have a story from the edge, a collaboration proposal, or a soundscape inquiry? Get in touch with our team.</p>
+  </header>
+
+  <!-- Interactive Grid of Info and Form -->
+  <section class="contact-grid-section section-padding">
+    <div class="grid-2 contact-layout">
+      
+      <!-- Connection Details block -->
+      <div class="contact-details">
+        <h3>Connect Directly</h3>
+        <p class="details-pitch">We seek genuine conversations, editorial collaborations, and listening circle invitations.</p>
+
+        <div class="connection-cards">
+          <div class="glass-panel connect-card">
+            <span class="card-icon">✉️</span>
+            <div>
+              <h5>General Queries</h5>
+              <a href="mailto:hello&#64;elsewherejournal.com">hello&#64;elsewherejournal.com</a>
+            </div>
+          </div>
+
+          <div class="glass-panel connect-card">
+            <span class="card-icon">📻</span>
+            <div>
+              <h5>Audio Collaborations</h5>
+              <a href="mailto:audio&#64;elsewherejournal.com">audio&#64;elsewherejournal.com</a>
+            </div>
+          </div>
+
+          <div class="glass-panel connect-card">
+            <span class="card-icon">🛰️</span>
+            <div>
+              <h5>Follow Dispatch</h5>
+              <p>Instagram: &#64;elsewhere.journal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fluid Form block -->
+      <div class="glass-panel form-card">
+        @if (!isSubmitted()) {
+          <h3>Leave a Message</h3>
+          <form class="contact-form" (submit)="submitForm($event)">
+            
+            <!-- Name (floating label) -->
+            <div class="input-group">
+              <input 
+                type="text" 
+                id="name" 
+                class="form-input" 
+                placeholder=" " 
+                [ngModel]="name()" 
+                (ngModelChange)="name.set($event)"
+                name="name"
+                required
+              />
+              <label for="name" class="form-label">Your Name</label>
+            </div>
+
+            <!-- Email (floating label) -->
+            <div class="input-group">
+              <input 
+                type="email" 
+                id="email" 
+                class="form-input" 
+                placeholder=" " 
+                [ngModel]="email()" 
+                (ngModelChange)="email.set($event)"
+                name="email"
+                required
+              />
+              <label for="email" class="form-label">Email Address</label>
+            </div>
+
+            <!-- Subject Dropdown -->
+            <div class="input-group select-group">
+              <select 
+                id="subject" 
+                class="form-select" 
+                [ngModel]="subject()" 
+                (ngModelChange)="subject.set($event)"
+                name="subject"
+              >
+                <option value="general">General Narrative Inquiry</option>
+                <option value="audio">Spatial Audio / Podcast Collaboration</option>
+                <option value="press">Press & Guest Speaking</option>
+              </select>
+              <label for="subject" class="select-label">Regarding</label>
+            </div>
+
+            <!-- Message (floating label) -->
+            <div class="input-group textarea-group">
+              <textarea 
+                id="message" 
+                class="form-textarea" 
+                placeholder=" " 
+                [ngModel]="message()" 
+                (ngModelChange)="message.set($event)"
+                name="message"
+                required
+              ></textarea>
+              <label for="message" class="form-label">Your Message</label>
+            </div>
+
+            <button type="submit" class="btn-gold btn-submit">Send Message</button>
+          </form>
+        } @else {
+          <!-- Interactive Success Animation box -->
+          <div class="success-screen animate-fade-in">
+            <div class="success-ring">
+              <div class="check-mark">✓</div>
+            </div>
+            <h4>Message Transmitted</h4>
+            <p>Your dispatch has been successfully beamed into Elsewhere's satellite receiver. Aria or Julian will be in touch via the ether shortly.</p>
+            <button class="btn-outline" (click)="isSubmitted.set(false)">Send Another Message</button>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+</div>

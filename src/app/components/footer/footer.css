@@ -1,0 +1,237 @@
+:host {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  border-top: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-section {
+  padding: 6rem 0 3rem;
+  position: relative;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+/* Newsletter glass box */
+.newsletter-box {
+  padding: 3rem;
+  border-radius: var(--border-radius-lg);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 3rem;
+  background: rgba(25, 28, 36, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.newsletter-text h4 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.newsletter-text p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.newsletter-form {
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  background: var(--bg-primary);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  padding: 0.4rem;
+  transition: var(--transition-snappy);
+}
+
+.form-group:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(224, 169, 109, 0.1);
+}
+
+.newsletter-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.newsletter-input:focus {
+  outline: none;
+}
+
+.newsletter-btn {
+  background: var(--gradient-accent);
+  color: #000;
+  border: none;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition-snappy);
+}
+
+.newsletter-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--color-accent);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.success-icon {
+  background: rgba(224, 169, 109, 0.1);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(224, 169, 109, 0.3);
+  font-weight: bold;
+}
+
+/* Footer directory link columns */
+.footer-directory {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+}
+
+.brand-col .footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.brand-pitch {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.footer-col h5 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  margin-bottom: 1.8rem;
+}
+
+.footer-links, .footer-contact {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+  padding-left: 5px;
+}
+
+.footer-contact li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+  font-weight: 300;
+}
+
+.contact-link {
+  color: var(--text-primary);
+  transition: var(--transition-snappy);
+}
+
+.contact-link:hover {
+  color: var(--color-accent);
+}
+
+/* Footer Bottom Area */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-meta a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-meta a:hover {
+  color: var(--color-accent);
+}
+
+.divider {
+  color: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsiveness */
+@media (max-width: 968px) {
+  .newsletter-box {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .footer-directory {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}

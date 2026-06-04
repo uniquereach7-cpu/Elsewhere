@@ -1,0 +1,61 @@
+<div class="journey-page animate-fade-in container">
+  <!-- Glow fields -->
+  <div class="glow-spot" style="top: 25%; left: 5%;"></div>
+  <div class="glow-spot-teal" style="top: 60%; right: 10%;"></div>
+
+  <!-- Page Header -->
+  <header class="journey-header section-padding">
+    <span class="badge">Chronicles</span>
+    <h1>The Expedition Timeline</h1>
+    <p class="journey-lead">Track our slow travel chapters through space and time. Click each milestone card to unfold the full narrative and field notes.</p>
+  </header>
+
+  <!-- Vertical Timeline container -->
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
+
+    @for (chapter of chapters(); track chapter.id) {
+      <div class="timeline-item" [class.expanded]="chapter.expanded">
+        
+        <!-- Timeline dot locator -->
+        <div class="timeline-dot" (click)="toggleChapter(chapter.id)">
+          <div class="dot-inner"></div>
+        </div>
+
+        <!-- Timeline content box -->
+        <div class="timeline-content glass-panel" [class.active-card]="chapter.expanded">
+          <header class="card-header" (click)="toggleChapter(chapter.id)">
+            <div class="card-meta">
+              <span class="chapter-label">{{ chapter.chapterNum }}</span>
+              <span class="chapter-date">{{ chapter.date }}</span>
+            </div>
+            <h3>{{ chapter.title }}</h3>
+            <span class="location-badge">📍 {{ chapter.location }}</span>
+          </header>
+
+          <div class="card-body">
+            <p class="chapter-summary">{{ chapter.summary }}</p>
+
+            @if (chapter.expanded) {
+              <div class="full-story animate-fade-in">
+                <hr class="story-divider" />
+                <h5>Expedition Field Notes</h5>
+                <p class="story-text">{{ chapter.fullStory }}</p>
+                <div class="story-audio-teaser">
+                  <span class="audio-wave-icon">🔊</span>
+                  <span>Audio recordings for this chapter are available in the <a routerLink="/insights" class="audio-link">Insights Hub</a>.</span>
+                </div>
+              </div>
+            }
+
+            <button class="btn-toggle-story" (click)="toggleChapter(chapter.id)">
+              {{ chapter.expanded ? 'Conclude Entry' : 'Unfold Entry' }}
+              <span class="arrow" [class.up]="chapter.expanded">↓</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

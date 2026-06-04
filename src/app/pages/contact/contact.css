@@ -1,0 +1,264 @@
+.contact-page {
+  padding-top: 120px;
+  padding-bottom: 8rem;
+}
+
+.contact-header {
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.contact-lead {
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+/* Contact Grid Layout */
+.contact-layout {
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+.contact-details h3 {
+  font-size: 2.2rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.details-pitch {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+}
+
+/* Direct connection cards */
+.connection-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.connect-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  align-items: center;
+  background: rgba(25, 28, 36, 0.3);
+}
+
+.connect-card:hover {
+  transform: translateX(5px);
+  border-color: rgba(224, 169, 109, 0.15);
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  background: rgba(224, 169, 109, 0.08);
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(224, 169, 109, 0.15);
+  flex-shrink: 0;
+}
+
+.connect-card h5 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.connect-card a {
+  color: var(--color-accent);
+  font-size: 0.95rem;
+}
+
+.connect-card a:hover {
+  color: var(--color-accent-hover);
+}
+
+.connect-card p {
+  font-size: 0.95rem;
+}
+
+/* Form card and Floating label engine */
+.form-card {
+  padding: 4rem;
+  background: rgba(25, 28, 36, 0.4);
+  border-radius: var(--border-radius-lg);
+}
+
+.form-card h3 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* Input Fields styling */
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  background: rgba(8, 9, 12, 0.6);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-snappy);
+}
+
+.form-input {
+  padding: 1.2rem;
+}
+
+.form-textarea {
+  padding: 1.2rem;
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Custom Dropdown Select */
+.form-select {
+  padding: 1.2rem;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2rem;
+}
+
+.form-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Floating Label Logic */
+.form-label {
+  position: absolute;
+  left: 1.2rem;
+  top: 1.2rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: var(--transition-snappy);
+}
+
+/* Textarea needs alignment adjustment */
+.textarea-group .form-label {
+  top: 1.2rem;
+}
+
+/* Floating Label triggers */
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label,
+.form-textarea:focus ~ .form-label,
+.form-textarea:not(:placeholder-shown) ~ .form-label {
+  top: -9px;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  background: var(--bg-tertiary);
+  color: var(--color-accent);
+  padding: 0 0.5rem;
+  border-radius: 4px;
+}
+
+/* Focus borders */
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 12px rgba(224, 169, 109, 0.1);
+}
+
+/* Dropdown specific floating label label placement */
+.select-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-label {
+  position: absolute;
+  top: -9px;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  background: var(--bg-tertiary);
+  color: var(--color-accent);
+  padding: 0 0.5rem;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  width: 100%;
+}
+
+/* Success transmit display screen */
+.success-screen {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+.success-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-glow);
+  animation: pulse 2s infinite;
+}
+
+.check-mark {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.success-screen h4 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.success-screen p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 400px;
+  margin-bottom: 3rem;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 15px rgba(224, 169, 109, 0.2); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(224, 169, 109, 0.4); }
+  100% { transform: scale(1); box-shadow: 0 0 15px rgba(224, 169, 109, 0.2); }
+}
+
+/* Responsiveness */
+@media (max-width: 968px) {
+  .form-card {
+    padding: 2rem;
+  }
+}

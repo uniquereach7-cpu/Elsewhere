@@ -1,0 +1,98 @@
+<div class="insights-page animate-fade-in container">
+  <!-- Glowing aurora spheres -->
+  <div class="glow-spot" style="top: 20%; right: 10%;"></div>
+  <div class="glow-spot-teal" style="bottom: 25%; left: 5%;"></div>
+
+  <!-- Page Header -->
+  <header class="insights-header section-padding">
+    <span class="badge">Auditory & Text Journal</span>
+    <h1>Insights & Podcasts</h1>
+    <p class="insights-lead">Listen to our high-fidelity spatial soundscapes and explore narrative dispatches from recent expeditions.</p>
+  </header>
+
+  <!-- Interactive Soundscapes Player Widget -->
+  <section class="podcast-player-section section-padding">
+    <div class="glass-panel podcast-card">
+      <div class="podcast-artwork">
+        <div class="artwork-waves" [class.playing]="isPlaying()">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span class="artwork-badge">Soundscape</span>
+      </div>
+
+      <div class="player-controls-container">
+        <div class="player-header">
+          <span class="series-tag">{{ podcastSeries() }}</span>
+          <h3>{{ podcastTitle() }}</h3>
+        </div>
+
+        <!-- Custom Seekbar progress tracker -->
+        <div class="seekbar-container">
+          <div class="seekbar-bar">
+            <div class="seekbar-progress" [style.width.%]="progressPercent"></div>
+          </div>
+          <div class="time-readouts">
+            <span>{{ formatTime(currentTime()) }}</span>
+            <span>{{ formatTime(duration()) }}</span>
+          </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="control-row">
+          <div class="secondary-controls">
+            <button class="player-btn text-muted" aria-label="Shuffle">🔀</button>
+          </div>
+
+          <div class="primary-controls">
+            <button class="player-btn prev" aria-label="Previous Episode">⏮</button>
+            <button class="play-trigger" (click)="togglePlay()" [class.playing]="isPlaying()" aria-label="Play or Pause">
+              {{ isPlaying() ? '⏸' : '▶' }}
+            </button>
+            <button class="player-btn next" aria-label="Next Episode">⏭</button>
+          </div>
+
+          <div class="secondary-controls volume-control">
+            <span class="volume-icon">🔊</span>
+            <input 
+              type="range" 
+              class="volume-slider" 
+              [value]="volume()" 
+              (input)="volume.set(+volumeSlider.value)"
+              #volumeSlider
+              min="0" max="100" 
+              aria-label="Volume Slider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Masonry Grid of Editorial Essays -->
+  <section class="editorial-grid-section section-padding">
+    <div class="grid-header">
+      <span class="badge">Written Dispatches</span>
+      <h2>Editorial Logbook</h2>
+    </div>
+    <div class="grid-2 editorial-grid">
+      @for (art of articles(); track art.id) {
+        <article class="glass-panel article-card">
+          <div class="article-header">
+            <span class="category-badge">{{ art.category }}</span>
+            <span class="article-date">{{ art.date }}</span>
+          </div>
+          <h3>{{ art.title }}</h3>
+          <p>{{ art.excerpt }}</p>
+          <div class="article-footer">
+            <span class="read-time">⏳ {{ art.readTime }}</span>
+            <a href="#" class="btn-read" (click)="$event.preventDefault()">Read Entry →</a>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</div>

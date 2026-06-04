@@ -1,0 +1,29 @@
+@if (!isHomeRoute()) {
+  <nav class="hero-nav">
+    <a routerLink="/home" class="nav-brand">ELSEWHERE FILM STUDIO</a>
+    <div class="nav-right">
+      <a routerLink="/contact" class="nav-link">START A PROJECT ↗</a>
+      <button class="nav-menu-btn" (click)="toggleMenu()" aria-label="Menu Icon">
+        <span class="grid-icon-dots" [class.menu-open]="isMenuOpen()">
+          <span></span><span></span>
+          <span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Fullscreen Mega Menu Overlay -->
+  <div class="fullscreen-menu-overlay" [class.overlay-visible]="isMenuOpen()" (click)="closeMenuOnBackdrop($event)">
+    <button class="close-menu-btn" (click)="closeMenu()" aria-label="Close Menu">✕</button>
+
+    <div class="overlay-content">
+      <nav class="overlay-nav-links">
+        <a routerLink="/home"     class="overlay-link" (click)="closeMenu()">Home</a>
+        <a routerLink="/about"    class="overlay-link" (click)="closeMenu()">About</a>
+        <a routerLink="/journey"  class="overlay-link" (click)="closeMenu()">Journey</a>
+        <a routerLink="/insights" class="overlay-link" (click)="closeMenu()">Insights &amp; Podcast</a>
+        <a routerLink="/contact"  class="overlay-link" (click)="closeMenu()">Contact</a>
+      </nav>
+    </div>
+  </div>
+}

@@ -1,0 +1,411 @@
+<div class="home-page animate-fade-in">
+  <!-- Glowing aurora spheres -->
+  <div class="glow-spot" style="top: 10%; left: 10%;"></div>
+  <div class="glow-spot-teal" style="top: 30%; right: 5%;"></div>
+  <div class="glow-spot" style="top: 70%; left: 30%;"></div>
+
+  <!-- Cinematic Hero Section -->
+  <section class="hero-container" (mousemove)="onMouseMove($event)">
+    <nav class="hero-nav">
+      <a routerLink="/home" class="nav-brand">ELSEWHERE FILM STUDIO</a>
+      <div class="nav-right">
+        <a routerLink="/contact" class="nav-link">START A PROJECT ↗</a>
+        <button class="nav-menu-btn" (click)="toggleMenu()" aria-label="Menu Icon">
+          <!-- Dot grid matching the reference image's grid layout -->
+          <span class="grid-icon-dots" [class.menu-open]="isMenuOpen()">
+            <span></span><span></span>
+            <span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Fullscreen Mega Menu Overlay -->
+    <div class="fullscreen-menu-overlay" [class.overlay-visible]="isMenuOpen()" (click)="closeMenuOnBackdrop($event)">
+      <button class="close-menu-btn" (click)="closeMenu()" aria-label="Close Menu">✕</button>
+
+      <div class="overlay-content">
+        <span class="overlay-label">NAVIGATION</span>
+        <nav class="overlay-nav-links">
+          <a routerLink="/home"             class="overlay-link" (click)="closeMenu()">Home</a>
+          <a routerLink="/about"            class="overlay-link" (click)="closeMenu()">About</a>
+          <a routerLink="/journey"          class="overlay-link" (click)="closeMenu()">Journey</a>
+          <a routerLink="/insights"         class="overlay-link" (click)="closeMenu()">Insights &amp; Podcast</a>
+          <a routerLink="/contact"          class="overlay-link" (click)="closeMenu()">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="hero-canvas">
+      
+      <!-- <div class="bg-typography" [style.transform]="'translate(' + mouseX() * 0.02 + 'px, ' + mouseY() * 0.02 + 'px)'">
+        <h1 class="giant-text">ELSEWHERE</h1>
+        <h1 class="giant-text offset-text">FILM STUDIO</h1>
+      </div> -->
+
+      <div class="center-subject">
+        <img src="assets/hero.jpeg" alt="Film Director" class="subject-img" />
+      </div>
+
+      <div class="content-block left-block">
+        <p class="body-text">
+          AS A FILM CONSULTANCY, WE FOCUS ON NAVIGATING THE JOURNEY FROM SCRIPT TO FESTIVAL TO DISTRIBUTION.
+        </p>
+        <p class="body-text highlight-text">
+          CLARITY OF THOUGHT DELIVERED.
+        </p>
+        <a routerLink="/contact" class="cta-button">
+          Let's talk <span class="arrow">⟶</span>
+        </a>
+      </div>
+
+      <div class="content-block right-block">
+        <p class="body-text">
+          A PREMIUM CINEMATIC PLATFORM DESIGNED TO REVOLUTIONIZE THE WAY INDEPENDENT FILMMAKERS INTERACT WITH THE INDUSTRY.
+        </p>
+        <p class="body-text highlight-text">
+          EXCEPTIONAL STRATEGY AND FESTIVAL SUCCESS.
+        </p>
+        <div class="tags-container">
+          <span class="tag">FILM STRATEGY</span>
+          <span class="tag">2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+        <span>Script Consulting ✦ Festival Strategy ✦ Distribution ✦ Project Development ✦ Script Consulting ✦ Festival Strategy ✦ Distribution ✦ Project Development ✦</span>
+      </div>
+    </div>
+  </section>
+  <section class="editorial-section problem-section reveal-target" #problemSection>
+  <div class="problem-container">
+    
+    <div class="problem-visual">
+      <span class="giant-number">:]</span>
+    </div>
+    
+    <div class="problem-content">
+      <h2 class="contrarian-truth">
+        "Most films don't fail at festivals.<br>They fail after."
+      </h2>
+      <div class="truth-body">
+        <p class="body-copy">
+          GETTING IN IS THE EASY PART. GETTING OUT WITH A DEAL, AN AUDIENCE, AND A CAREER — THAT'S THE WORK NOBODY TALKS ABOUT.
+        </p>
+        <p class="body-highlight">
+          WE BRING CLARITY OF THOUGHT TO A CHAOTIC JOURNEY.
+        </p>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<section class="editorial-section solution-section reveal-target" #solutionSection>
+  <div class="section-header">
+    <span class="badge-tag">THE SYSTEM</span>
+    <h2 class="section-title">Festival-to-Distribution OS</h2>
+  </div>
+
+  <div class="os-grid">
+    
+    <div class="os-card chunky-block">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop" alt="Early Stage" class="moody-img">
+      </div>
+      <div class="card-content">
+        <div class="stage-header">
+          <span class="stage-num">01</span>
+          <h3 class="stage-title">Early Stage</h3>
+        </div>
+        <p class="stage-desc">Solidify the foundation before the camera rolls.</p>
+      </div>
+    </div>
+
+    <div class="os-card chunky-block staggered-down">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1485001564903-56e6a54d46ce?q=80&w=600&auto=format&fit=crop" alt="Festival Strategy" class="moody-img">
+      </div>
+      <div class="card-content">
+        <div class="stage-header">
+          <span class="stage-num">02</span>
+          <h3 class="stage-title">Festival Strategy</h3>
+        </div>
+        <p class="stage-desc">Know exactly which festivals want your film.</p>
+      </div>
+    </div>
+
+    <div class="os-card chunky-block">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=600&auto=format&fit=crop" alt="Titles & Campaigns" class="moody-img">
+      </div>
+      <div class="card-content">
+        <div class="stage-header">
+          <span class="stage-num">03</span>
+          <h3 class="stage-title">Titles & Campaigns</h3>
+        </div>
+        <p class="stage-desc">Positioning that speaks to buyers and audiences.</p>
+      </div>
+    </div>
+
+    <div class="os-card chunky-block staggered-down">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1604928141064-207cea6f5722?q=80&w=600&auto=format&fit=crop" alt="Distribution Bridge" class="moody-img">
+      </div>
+      <div class="card-content">
+        <div class="stage-header">
+          <span class="stage-num">04</span>
+          <h3 class="stage-title">Distribution Bridge</h3>
+        </div>
+        <p class="stage-desc">Navigate the sale without losing your soul.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-wrapper">
+    <a href="/consult" class="artistic-cta">
+      <span class="cta-text">Book a Consult</span>
+      <span class="cta-arrow">⟶</span>
+    </a>
+  </div>
+</section>
+<section class="editorial-section timeline-section reveal-target" #statusSection>
+  
+  <div class="timeline-hero">
+    <div class="timeline-text">
+      <h2 class="timeline-title">Where is your film right now?</h2>
+      <p class="timeline-sub">A carefully crafted path from idea to lasting impact. Tell us where you are, and we'll figure out where to go.</p>
+    </div>
+
+    <div class="timeline-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop" alt="Cinematic Journey" class="timeline-img">
+      <div class="fade-overlay"></div>
+    </div>
+  </div>
+
+  <div class="linear-track-container">
+    
+    <div class="track-line"></div>
+
+    <div class="track-nodes">
+      
+      <div class="track-item group">
+        <div class="node-dot glow-burgundy"></div>
+        <div class="track-content">
+          <span class="track-num color-burgundy">01</span>
+          <h3 class="track-title">I have an idea / script</h3>
+          <p class="track-desc">Solidify the foundation before the camera rolls.</p>
+        </div>
+      </div>
+
+      <div class="track-item group">
+        <div class="node-dot glow-indigo"></div>
+        <div class="track-content">
+          <span class="track-num color-indigo">02</span>
+          <h3 class="track-title">I have a rough cut</h3>
+          <p class="track-desc">Shape your vision into a compelling, powerful narrative.</p>
+        </div>
+      </div>
+
+      <div class="track-item group">
+        <div class="node-dot glow-burgundy"></div>
+        <div class="track-content">
+          <span class="track-num color-burgundy">03</span>
+          <h3 class="track-title">Submitted to festivals</h3>
+          <p class="track-desc">Craft the perfect strategy to showcase your film to the right audiences.</p>
+        </div>
+      </div>
+
+      <div class="track-item group">
+        <div class="node-dot glow-indigo"></div>
+        <div class="track-content">
+          <span class="track-num color-indigo">04</span>
+          <h3 class="track-title">I need distribution</h3>
+          <p class="track-desc">Support your next steps—distribution, partnerships, and career growth.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="cta-bottom-right">
+    <a href="/consult" class="premium-link">
+      START YOUR JOURNEY <span class="arrow">⟶</span>
+    </a>
+  </div>
+
+</section>
+<!-- WHAT YOU GET / OUTPUTS SECTION -->
+<!-- WHAT YOU GET / OUTPUTS SECTION -->
+<section class="editorial-section outputs-section reveal-target" #outputsSection>
+  
+  <!-- Top Half: Editorial Split -->
+  <div class="outputs-hero">
+    
+    <div class="outputs-text">
+      <h2 class="outputs-title">What You Walk Away With</h2>
+      <p class="outputs-sub">
+        We don't just offer advice. We build concrete frameworks and pathways designed to give your film clarity, positioning, and a sustainable future.
+      </p>
+      
+      <a href="/about" class="premium-link">
+        OUR PHILOSOPHY <span class="arrow">⟶</span>
+      </a>
+    </div>
+
+    <!-- Direction / Independent Film Set Image -->
+    <div class="outputs-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2000&auto=format&fit=crop" alt="Cinematic clapperboard on an active film set" class="outputs-img">
+      <!-- Gradient overlays to fade the image into the background smoothly -->
+      <div class="fade-overlay-left"></div>
+      <div class="fade-overlay-bottom"></div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Half: 3-Column Content Grid -->
+  <div class="outputs-grid-wrapper">
+    <div class="outputs-grid">
+      
+      <!-- Output 01 -->
+      <div class="output-card group">
+        <span class="output-label color-burgundy">OUTPUT 01</span>
+        <h3 class="output-heading">Festival Target List</h3>
+        <p class="output-desc">A ranked, reasoned map of festivals — built around your film, not a template.</p>
+      </div>
+
+      <!-- Output 02 -->
+      <div class="output-card group">
+        <span class="output-label color-indigo">OUTPUT 02</span>
+        <h3 class="output-heading">Positioning Strategy</h3>
+        <p class="output-desc">How the film is framed, titled, and pitched to programmers, press, and buyers.</p>
+      </div>
+
+      <!-- Output 03 -->
+      <div class="output-card group">
+        <span class="output-label color-burgundy">OUTPUT 03</span>
+        <h3 class="output-heading">Distribution Pathways</h3>
+        <p class="output-desc">Concrete routes to sales, streamers, and theatrical — with the introductions to match.</p>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- WHY FILMMAKERS TRUST US SECTION (Asymmetrical Bento Layout) -->
+<section class="editorial-section trust-section reveal-target" #trustSection>
+  
+  <!-- Warm, Cinematic, Brown-Toned Background Image -->
+  <div class="trust-bg-image"></div>
+  
+  <!-- Warm Dark Gradient Overlay for perfect text contrast -->
+  <div class="trust-bg-overlay"></div>
+
+  <div class="trust-container">
+    
+    <!-- Left Column: The Big Statement -->
+    <div class="trust-intro">
+      <span class="badge-tag">OUR PHILOSOPHY</span>
+      <h2 class="trust-title">Why filmmakers trust us.</h2>
+      <p class="trust-subtitle">
+        Independent cinema does not suffer from a lack of talent. It suffers from a lack of clarity. We exist to bring structure to a chaotic journey.
+      </p>
+    </div>
+
+    <!-- Right Column: The Bento Box Grid (No Numbers) -->
+    <div class="trust-bento">
+      
+      <!-- Card 1: Featured / Large -->
+      <div class="bento-card card-large">
+        <div class="card-accent-line burgundy-line"></div>
+        <h3 class="bento-title">Contrarian Truths</h3>
+        <p class="bento-desc">
+          We don't sell the dream; we navigate the reality. Most films don't fail at festivals, they fail after. We build aggressive strategies for the aftermath.
+        </p>
+      </div>
+
+      <!-- Card 2: Standard -->
+      <div class="bento-card">
+        <div class="card-accent-line indigo-line"></div>
+        <h3 class="bento-title">Bespoke Pathways</h3>
+        <p class="bento-desc">
+          Discovery is not distribution. We create ranked, reasoned maps built specifically around your film's DNA—never a copy-paste template.
+        </p>
+      </div>
+
+      <!-- Card 3: Standard -->
+      <div class="bento-card">
+        <div class="card-accent-line burgundy-line"></div>
+        <h3 class="bento-title">The Creator's Lens</h3>
+        <p class="bento-desc">
+          Built by strategists and filmmakers with firsthand, battle-tested experience. We know what it takes to survive.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- INSIGHTS & PODCAST TEASER SECTION (Unboxed, Interactive Rows) -->
+<section class="editorial-section insights-teaser-section reveal-target" #insightsTeaserSection>
+  <div class="teaser-container">
+    
+    <!-- Minimal Header -->
+    <div class="teaser-header">
+      <span class="badge-tag">RESOURCES & RESEARCH</span>
+      <h2 class="teaser-title">The conversation begins after the applause.[cite: 1]</h2>
+      <p class="teaser-sub">
+        Explore our written field notes and long-form video podcasts documenting the invisible systems of the independent film ecosystem.[cite: 1, 2]
+      </p>
+    </div>
+
+    <!-- Unboxed Interactive Link Rows -->
+    <div class="teaser-links-wrapper">
+      
+      <!-- Row 1: The Podcast -->
+      <a href="/insights-podcast" class="teaser-link-row group">
+        
+        <!-- Hover Image Reveal (Hidden until hovered) -->
+        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1000&auto=format&fit=crop" alt="Podcast Microphone" class="hover-reveal-img">
+        
+        <div class="row-content">
+          <span class="row-num color-indigo">01</span>
+          <div class="row-text">
+            <h3 class="row-title">Elsewhere: The After Cut[cite: 1]</h3>
+            <p class="row-desc">A long-form video podcast exploring how independent films actually get seen, sold, and sustained.[cite: 1]</p>
+          </div>
+        </div>
+        
+        <div class="row-action">
+          <span class="read-text">WATCH & LISTEN</span>
+          <span class="row-arrow">⟶</span>
+        </div>
+      </a>
+
+      <!-- Row 2: Blogs / Insights -->
+      <a href="/insights-podcast" class="teaser-link-row group">
+        
+        <!-- Hover Image Reveal -->
+        <img src="https://images.unsplash.com/photo-1455309014309-98ffb55d28b1?q=80&w=1000&auto=format&fit=crop" alt="Typewriter / Writing" class="hover-reveal-img">
+        
+        <div class="row-content">
+          <span class="row-num color-burgundy">02</span>
+          <div class="row-text">
+            <h3 class="row-title">Field Notes & Guides</h3>
+            <p class="row-desc">Tactical frameworks on festival strategy, distribution pathways, and positioning.[cite: 2]</p>
+          </div>
+        </div>
+        
+        <div class="row-action">
+          <span class="read-text">READ INSIGHTS</span>
+          <span class="row-arrow">⟶</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>

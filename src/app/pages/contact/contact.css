@@ -70,7 +70,7 @@
 .hero-bg-image {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2000&auto=format&fit=crop');
+  background-image: url('/assets/contact-hero.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

@@ -1,60 +1,160 @@
-import { Component, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-interface JourneyChapter {
-  id: number;
-  chapterNum: string;
+interface SubBlock {
+  label: string;
+  body: string;
+}
+
+interface Stage {
+  num: string;
+  accent: 'burgundy' | 'indigo';
   title: string;
-  location: string;
-  date: string;
-  summary: string;
-  fullStory: string;
-  expanded: boolean;
+  tagline: string;
+  image: string;
+  blocks: SubBlock[];
+}
+
+interface Pathway {
+  num: string;
+  accent: 'burgundy' | 'indigo';
+  title: string;
+  arc: string;
+  desc: string;
 }
 
 @Component({
   selector: 'app-journey',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './journey.html',
   styleUrl: './journey.css'
 })
-export class JourneyComponent {
-  chapters = signal<JourneyChapter[]>([
-    {
-      id: 1,
-      chapterNum: 'Chapter I',
-      title: 'The Whispering Fjords',
-      location: 'Northern Norway',
-      date: 'Autumn 2024',
-      summary: 'A solo trek tracing the coastline on foot, recording the sonic texture of wind across deep icy waters.',
-      fullStory: 'Traversing the Arctic coastline, I spent seven days without meeting another soul. In the silence of the fjords, the auditory landscape became incredibly vivid. Every step on the black shingle, every splash of glacier water, and the low hum of the wind echoing in the rock fissures was documented. I discovered an abandoned fishing cabin near Reine, where I recorded a severe storm using a binaural head microphone, capturing the exact spatial feeling of rain and wooden beams groaning under pressure.',
-      expanded: false
-    },
-    {
-      id: 2,
-      chapterNum: 'Chapter II',
-      title: 'Echoes of the High Altiplano',
-      location: 'Andean Highlands, Bolivia',
-      date: 'Winter 2025',
-      summary: 'Ascending to 4,000 meters to document high-altitude silence and the ancient wind instrument songs of indigenous salt-gatherers.',
-      fullStory: 'The Altiplano is a vast, dry, silent expanse where distance loses meaning. At the Salar de Uyuni, the absolute silence at night is deafening. I sat with Eduardo, an elder salt miner, who played the "Siku" pan flute. The thin air gives the flute a breathy, celestial timber that echoes softly over the crystal plains. Our recordings capture the fusion of pan flute notes and the sharp cracking of drying salt crystals underfoot at sunset.',
-      expanded: false
-    },
-    {
-      id: 3,
-      chapterNum: 'Chapter III',
-      title: 'The Shaded Pathways of Yakushima',
-      location: 'Yakushima Island, Japan',
-      date: 'Spring 2026',
-      summary: 'Drifting through the primeval cedar forests to capture the soundscapes of heavy rainfall and moss-covered silence.',
-      fullStory: 'Yakushima is said to rain 35 days a month. In this lush green dome, I walked amongst giant cryptomeria trees that are thousands of years old. The acoustic environment is completely insulated by dense carpets of green moss. I set up hydrophones (water microphones) in the mountain streams, recording the hollow, rumbling under-water flow of rivers cascading down basalt stones. The resulting ambient recordings form a hypnotic rhythm of water hitting leaves, rocks, and mud.',
-      expanded: false
-    }
-  ]);
+export class JourneyComponent implements AfterViewInit {
 
-  toggleChapter(id: number) {
-    this.chapters.update(currentList =>
-      currentList.map(ch => ch.id === id ? { ...ch, expanded: !ch.expanded } : ch)
-    );
+  stages: Stage[] = [
+    {
+      num: '01',
+      accent: 'burgundy',
+      title: 'Early Stage / Production Support',
+      tagline: 'Solidify the foundation before the camera rolls.',
+      image: 'https://images.unsplash.com/photo-1571232151946-f7f00c61ade7?q=80&w=1400&auto=format&fit=crop',
+      blocks: [
+        {
+          label: "What You're Facing",
+          body: 'A brilliant script with no clear pathway. Financing conversations stalling. Decisions made in isolation that will define the next three years of the project.'
+        },
+        {
+          label: 'How We Help',
+          body: 'We pressure-test the script, packaging, and financial architecture before a single frame is shot — aligning intent with market reality from the first draft.'
+        },
+        {
+          label: 'What You Get',
+          body: 'Script consultation reports, co-production matching, and a packaging strategy aligned with target festivals and buyers.'
+        }
+      ]
+    },
+    {
+      num: '02',
+      accent: 'indigo',
+      title: 'Festival Strategy',
+      tagline: 'Know exactly which festivals want your film, and why.',
+      image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1400&auto=format&fit=crop',
+      blocks: [
+        {
+          label: "What You're Facing",
+          body: 'Submitting to two hundred festivals hoping one says yes. Burning fees with no pattern. Missing the premiere windows that actually matter.'
+        },
+        {
+          label: 'How We Help',
+          body: 'A ranked, reasoned festival map built around your film\'s DNA — premiere strategy, tier sequencing, programmer access, and timing.'
+        },
+        {
+          label: 'What You Get',
+          body: 'A targeted submission roadmap, programmer introductions where relevant, and premiere positioning that earns press and buyer attention.'
+        }
+      ]
+    },
+    {
+      num: '03',
+      accent: 'burgundy',
+      title: 'Titles & Campaigns',
+      tagline: 'Positioning that speaks to buyers, programmers, and audiences.',
+      image: 'https://images.unsplash.com/photo-1574267432553-4b4628081c31?q=80&w=1400&auto=format&fit=crop',
+      blocks: [
+        {
+          label: "What You're Facing",
+          body: 'A title that doesn\'t land. A logline that doesn\'t sell. A film nobody can describe in a single sentence.'
+        },
+        {
+          label: 'How We Help',
+          body: 'Editorial rework of the film\'s external identity — name, logline, synopsis, key art direction, and press positioning.'
+        },
+        {
+          label: 'What You Get',
+          body: 'A market-ready campaign kit, titling alternatives with rationale, press notes, EPK structure, and audience hooks.'
+        }
+      ]
+    },
+    {
+      num: '04',
+      accent: 'indigo',
+      title: 'Distribution Bridge',
+      tagline: 'Navigate the sale without losing the soul of the film.',
+      image: 'https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=1400&auto=format&fit=crop',
+      blocks: [
+        {
+          label: "What You're Facing",
+          body: 'The festival run is ending. No deal in hand. Limited intel on what buyers actually want, and a shrinking window to act on.'
+        },
+        {
+          label: 'How We Help',
+          body: 'We translate the festival run into deal-making — sales agent shortlists, direct buyer outreach, theatrical and streaming pathways.'
+        },
+        {
+          label: 'What You Get',
+          body: 'A distribution plan with named targets, negotiation strategy, and direct introductions to sales agents and acquisition executives.'
+        }
+      ]
+    }
+  ];
+
+  pathways: Pathway[] = [
+    {
+      num: '01',
+      accent: 'burgundy',
+      title: 'The Festival-First Path',
+      arc: 'Stages 02 → 03 → 04',
+      desc: 'A finished film with a strong rough cut. We build the premiere strategy, sharpen the campaign, and bridge into distribution while the heat lasts.'
+    },
+    {
+      num: '02',
+      accent: 'indigo',
+      title: 'The Production-First Path',
+      arc: 'Stages 01 → 02 → 03',
+      desc: 'A script and a director with a vision. We architect the package, plan the premiere targets early, and lock the positioning before the edit closes.'
+    },
+    {
+      num: '03',
+      accent: 'burgundy',
+      title: 'The Full-Arc Path',
+      arc: 'Stages 01 → 04',
+      desc: 'A full-journey partnership from script to deal. The complete operating system, applied end-to-end across the lifecycle of the film.'
+    }
+  ];
+
+  @ViewChildren('revealEl') revealEls!: QueryList<ElementRef>;
+
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver((entries, inst) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          inst.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    this.revealEls?.forEach(el => observer.observe(el.nativeElement));
   }
 }

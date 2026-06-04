@@ -1,132 +1,344 @@
-<div class="contact-page animate-fade-in container">
-  <!-- Glow coordinates -->
-  <div class="glow-spot" style="top: 15%; left: 10%;"></div>
-  <div class="glow-spot-teal" style="bottom: 15%; right: 10%;"></div>
+<div class="contact-page">
 
-  <!-- Page Header -->
-  <header class="contact-header section-padding">
-    <span class="badge">Connection</span>
-    <h1>Connect With Elsewhere</h1>
-    <p class="contact-lead">Have a story from the edge, a collaboration proposal, or a soundscape inquiry? Get in touch with our team.</p>
-  </header>
+  <!-- =============== HERO =============== -->
+  <section class="contact-hero-section">
+    <div class="hero-bg-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge-tag">Book a Consult</span>
+      @if (!isSubmitted()) {
+        <h1 class="hero-title">Let's build the<br/><span class="accent-word">pathway.</span></h1>
+        <p class="hero-subtitle">Tell us where the film is. We will figure out where it needs to go.</p>
+      } @else {
+        <h1 class="hero-title">Transmission<br/><span class="accent-word">received.</span></h1>
+        <p class="hero-subtitle">Thank you for sharing the work. We will be in touch within a few days.</p>
+      }
+    </div>
+  </section>
 
-  <!-- Interactive Grid of Info and Form -->
-  <section class="contact-grid-section section-padding">
-    <div class="grid-2 contact-layout">
-      
-      <!-- Connection Details block -->
-      <div class="contact-details">
-        <h3>Connect Directly</h3>
-        <p class="details-pitch">We seek genuine conversations, editorial collaborations, and listening circle invitations.</p>
+  <!-- =============== FORM SECTION =============== -->
+  <section class="form-section">
 
-        <div class="connection-cards">
-          <div class="glass-panel connect-card">
-            <span class="card-icon">✉️</span>
-            <div>
-              <h5>General Queries</h5>
-              <a href="mailto:hello&#64;elsewherejournal.com">hello&#64;elsewherejournal.com</a>
+    @if (!isSubmitted()) {
+
+      <!-- Linear Stepper (track + numbered nodes) -->
+      <div class="form-stepper-wrapper">
+        <div class="track-line"></div>
+        <ol class="form-stepper">
+          @for (s of steps; track s.number) {
+            <li class="track-item"
+                [class.active]="currentStep() === s.number"
+                [class.completed]="currentStep() > s.number">
+              <button type="button" class="track-btn" (click)="goToStep(s.number)">
+                <span class="node-dot"
+                  [class.glow-burgundy]="s.number % 2 === 1"
+                  [class.glow-indigo]="s.number % 2 === 0"></span>
+                <div class="track-content">
+                  <span class="track-num"
+                    [class.color-burgundy]="s.number % 2 === 1"
+                    [class.color-indigo]="s.number % 2 === 0">
+                    {{ '0' + s.number }}
+                  </span>
+                  <h3 class="track-title">{{ s.label }}</h3>
+                </div>
+              </button>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <!-- Step Header -->
+      <div class="step-header">
+        <span class="step-marker">{{ '0' + currentStep() }} / 0{{ steps.length }}</span>
+        <h2 class="step-title-big">{{ steps[currentStep() - 1].title }}</h2>
+        <p class="step-caption">{{ steps[currentStep() - 1].caption }}</p>
+      </div>
+
+      <!-- Form Body -->
+      <div class="form-body">
+
+        <!-- ============== STEP 1: BASIC CONTACT ============== -->
+        @if (currentStep() === 1) {
+          <div class="step-pane animate-fade-in">
+            <div class="section-marker">
+              <span class="marker-num color-burgundy">/ 01</span>
+              <span class="marker-label">Basic Contact</span>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName"
+                  [ngModel]="fullName()" (ngModelChange)="fullName.set($event)" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email"
+                  [ngModel]="email()" (ngModelChange)="email.set($event)" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone / WhatsApp</label>
+                <input type="text" id="phone" name="phone"
+                  [ngModel]="phone()" (ngModelChange)="phone.set($event)" required />
+              </div>
+
+              <div class="field">
+                <label for="cityCountry">City / Country</label>
+                <input type="text" id="cityCountry" name="cityCountry"
+                  [ngModel]="cityCountry()" (ngModelChange)="cityCountry.set($event)" required />
+              </div>
+
+              <div class="field span-2">
+                <label for="website">Website / IMDb / Portfolio / Vimeo / LinkedIn</label>
+                <input type="text" id="website" name="website"
+                  [ngModel]="website()" (ngModelChange)="website.set($event)" required />
+              </div>
             </div>
           </div>
+        }
 
-          <div class="glass-panel connect-card">
-            <span class="card-icon">📻</span>
-            <div>
-              <h5>Audio Collaborations</h5>
-              <a href="mailto:audio&#64;elsewherejournal.com">audio&#64;elsewherejournal.com</a>
+        <!-- ============== STEP 2: PROJECT OVERVIEW ============== -->
+        @if (currentStep() === 2) {
+          <div class="step-pane animate-fade-in">
+            <div class="section-marker">
+              <span class="marker-num color-indigo">/ 02</span>
+              <span class="marker-label">Project Overview</span>
+            </div>
+
+            <div class="field-grid">
+              <div class="field span-2">
+                <label for="projectTitle">Project Title</label>
+                <input type="text" id="projectTitle" name="projectTitle"
+                  [ngModel]="projectTitle()" (ngModelChange)="projectTitle.set($event)" required />
+              </div>
+
+              <div class="field">
+                <label for="format">Format</label>
+                <select id="format" name="format" class="select"
+                  [ngModel]="format()" (ngModelChange)="format.set($event)" required>
+                  <option value="" disabled>Choose a format —</option>
+                  @for (f of formatOptions; track f) {
+                    <option [value]="f">{{ f }}</option>
+                  }
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="stage">Current Stage</label>
+                <select id="stage" name="stage" class="select"
+                  [ngModel]="stage()" (ngModelChange)="stage.set($event)" required>
+                  <option value="" disabled>Choose a stage —</option>
+                  @for (s of stageOptions; track s) {
+                    <option [value]="s">{{ s }}</option>
+                  }
+                </select>
+              </div>
             </div>
           </div>
+        }
 
-          <div class="glass-panel connect-card">
-            <span class="card-icon">🛰️</span>
-            <div>
-              <h5>Follow Dispatch</h5>
-              <p>Instagram: &#64;elsewhere.journal</p>
+        <!-- ============== STEP 3: TEAM + LOGLINE + SWA ============== -->
+        @if (currentStep() === 3) {
+          <div class="step-pane animate-fade-in">
+            <div class="section-marker">
+              <span class="marker-num color-burgundy">/ 03</span>
+              <span class="marker-label">Project Team</span>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="directorName">Director Name</label>
+                <input type="text" id="directorName" name="directorName"
+                  [ngModel]="directorName()" (ngModelChange)="directorName.set($event)" required />
+              </div>
+
+              <div class="field">
+                <label for="producerName">Producer Name</label>
+                <input type="text" id="producerName" name="producerName"
+                  [ngModel]="producerName()" (ngModelChange)="producerName.set($event)" required />
+              </div>
+
+              <div class="field span-2">
+                <label for="productionCompany">Production Company <span class="hint">— write NA if none</span></label>
+                <input type="text" id="productionCompany" name="productionCompany"
+                  [ngModel]="productionCompany()" (ngModelChange)="productionCompany.set($event)" required />
+              </div>
+
+              <div class="field span-2">
+                <label for="logline">Logline <span class="hint">— within 50 words</span></label>
+                <textarea id="logline" name="logline" rows="2"
+                  [ngModel]="logline()" (ngModelChange)="logline.set($event)" required></textarea>
+                <div class="word-count" [class.over]="loglineWordCount() > 50">{{ loglineWordCount() }} / 50</div>
+              </div>
+            </div>
+
+            <div class="section-marker second">
+              <span class="marker-num color-indigo">/ 04</span>
+              <span class="marker-label">Registration</span>
+            </div>
+
+            <div class="field">
+              <label class="block-label">Is the project registered with SWA or equivalent organisation?</label>
+              <div class="pill-row">
+                <button type="button" class="pill"
+                  [class.selected]="swaRegistered() === 'YES'"
+                  (click)="selectSwa('YES')">Yes</button>
+                <button type="button" class="pill"
+                  [class.selected]="swaRegistered() === 'NO'"
+                  (click)="selectSwa('NO')">No</button>
+              </div>
+            </div>
+
+            @if (swaRegistered() === 'YES') {
+              <div class="field animate-fade-in">
+                <label for="swaNumber">SWA Registration Number <span class="hint">— or write NA</span></label>
+                <input type="text" id="swaNumber" name="swaNumber"
+                  [ngModel]="swaNumber()" (ngModelChange)="swaNumber.set($event)" required />
+              </div>
+            }
+          </div>
+        }
+
+        <!-- ============== STEP 4: OPTIONAL ============== -->
+        @if (currentStep() === 4) {
+          <div class="step-pane animate-fade-in">
+            <div class="section-marker">
+              <span class="marker-num color-indigo">/ 05</span>
+              <span class="marker-label">Optional Information</span>
+            </div>
+
+            <div class="field">
+              <label for="synopsis">Synopsis <span class="hint">— within 250 words</span></label>
+              <textarea id="synopsis" name="synopsis" rows="6"
+                [ngModel]="synopsis()" (ngModelChange)="synopsis.set($event)"></textarea>
+              <div class="word-count" [class.over]="synopsisWordCount() > 250">{{ synopsisWordCount() }} / 250</div>
+            </div>
+
+            <div class="field">
+              <label for="keyCrew">Key Crew Attached</label>
+              <input type="text" id="keyCrew" name="keyCrew"
+                [ngModel]="keyCrew()" (ngModelChange)="keyCrew.set($event)" />
+            </div>
+
+            <div class="field">
+              <label for="previousWork">Previous Work / Festival History of Director and Producer</label>
+              <textarea id="previousWork" name="previousWork" rows="3"
+                [ngModel]="previousWork()" (ngModelChange)="previousWork.set($event)"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="block-label">What kind of support are you seeking?</label>
+              <div class="check-row">
+                @for (opt of supportOptions; track opt) {
+                  <button type="button" class="check-pill"
+                    [class.selected]="isSupportSelected(opt)"
+                    (click)="toggleSupport(opt)">
+                    <span class="check-dot"></span>
+                    {{ opt }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="challenges">What are your current challenges?</label>
+              <textarea id="challenges" name="challenges" rows="4"
+                [ngModel]="challenges()" (ngModelChange)="challenges.set($event)"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="block-label">What are your goals for this film?</label>
+              <div class="check-row">
+                @for (opt of goalOptions; track opt) {
+                  <button type="button" class="check-pill"
+                    [class.selected]="isGoalSelected(opt)"
+                    (click)="toggleGoal(opt)">
+                    <span class="check-dot"></span>
+                    {{ opt }}
+                  </button>
+                }
+              </div>
             </div>
           </div>
+        }
+
+        <!-- Navigation -->
+        <div class="form-nav">
+          <button type="button" class="ghost-btn"
+            (click)="goBack()"
+            [disabled]="currentStep() === 1">
+            <span class="arrow back-arrow">⟵</span> Back
+          </button>
+
+          <span class="nav-marker">{{ '0' + currentStep() }} <span class="muted">/ 0{{ steps.length }}</span></span>
+
+          <button type="button" class="solid-cta-btn"
+            (click)="goNext()"
+            [disabled]="!currentStepValid()">
+            {{ currentStep() === steps.length ? 'Submit' : 'Continue' }}
+            <span class="arrow">⟶</span>
+          </button>
         </div>
       </div>
 
-      <!-- Fluid Form block -->
-      <div class="glass-panel form-card">
-        @if (!isSubmitted()) {
-          <h3>Leave a Message</h3>
-          <form class="contact-form" (submit)="submitForm($event)">
-            
-            <!-- Name (floating label) -->
-            <div class="input-group">
-              <input 
-                type="text" 
-                id="name" 
-                class="form-input" 
-                placeholder=" " 
-                [ngModel]="name()" 
-                (ngModelChange)="name.set($event)"
-                name="name"
-                required
-              />
-              <label for="name" class="form-label">Your Name</label>
-            </div>
+    } @else {
 
-            <!-- Email (floating label) -->
-            <div class="input-group">
-              <input 
-                type="email" 
-                id="email" 
-                class="form-input" 
-                placeholder=" " 
-                [ngModel]="email()" 
-                (ngModelChange)="email.set($event)"
-                name="email"
-                required
-              />
-              <label for="email" class="form-label">Email Address</label>
-            </div>
-
-            <!-- Subject Dropdown -->
-            <div class="input-group select-group">
-              <select 
-                id="subject" 
-                class="form-select" 
-                [ngModel]="subject()" 
-                (ngModelChange)="subject.set($event)"
-                name="subject"
-              >
-                <option value="general">General Narrative Inquiry</option>
-                <option value="audio">Spatial Audio / Podcast Collaboration</option>
-                <option value="press">Press & Guest Speaking</option>
-              </select>
-              <label for="subject" class="select-label">Regarding</label>
-            </div>
-
-            <!-- Message (floating label) -->
-            <div class="input-group textarea-group">
-              <textarea 
-                id="message" 
-                class="form-textarea" 
-                placeholder=" " 
-                [ngModel]="message()" 
-                (ngModelChange)="message.set($event)"
-                name="message"
-                required
-              ></textarea>
-              <label for="message" class="form-label">Your Message</label>
-            </div>
-
-            <button type="submit" class="btn-gold btn-submit">Send Message</button>
-          </form>
-        } @else {
-          <!-- Interactive Success Animation box -->
-          <div class="success-screen animate-fade-in">
-            <div class="success-ring">
-              <div class="check-mark">✓</div>
-            </div>
-            <h4>Message Transmitted</h4>
-            <p>Your dispatch has been successfully beamed into Elsewhere's satellite receiver. Aria or Julian will be in touch via the ether shortly.</p>
-            <button class="btn-outline" (click)="isSubmitted.set(false)">Send Another Message</button>
-          </div>
-        }
+      <!-- Success -->
+      <div class="success-screen">
+        <span class="badge-tag">Sent</span>
+        <h2 class="step-title-big">Consult request<br/><span class="accent-word">in the receiver.</span></h2>
+        <p class="step-caption">We respond within a few business days. In the meantime, the team continues to be reachable directly below.</p>
+        <button class="solid-cta-btn" (click)="startOver()">Submit another project <span class="arrow">⟶</span></button>
       </div>
 
-    </div>
+    }
   </section>
+
+  <!-- =============== DIRECT CONNECT STRIP =============== -->
+  @if (!isSubmitted()) {
+    <section class="direct-section">
+      <div class="direct-container">
+        <div class="direct-text">
+          <span class="badge-tag">Direct</span>
+          <h2 class="section-title">Or reach us directly.</h2>
+          <p class="direct-desc">Prefer email or a quieter channel? Pick the desk.</p>
+        </div>
+
+        <ul class="direct-list">
+          <li>
+            <a href="mailto:hello&#64;elsewherejournal.com" class="direct-row group">
+              <span class="row-num color-burgundy">01</span>
+              <div class="row-text">
+                <h3 class="row-title">General Queries</h3>
+                <p class="row-desc">hello&#64;elsewherejournal.com</p>
+              </div>
+              <span class="row-arrow">⟶</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:audio&#64;elsewherejournal.com" class="direct-row group">
+              <span class="row-num color-indigo">02</span>
+              <div class="row-text">
+                <h3 class="row-title">Audio Collaborations</h3>
+                <p class="row-desc">audio&#64;elsewherejournal.com</p>
+              </div>
+              <span class="row-arrow">⟶</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="direct-row group">
+              <span class="row-num color-burgundy">03</span>
+              <div class="row-text">
+                <h3 class="row-title">Follow the Dispatch</h3>
+                <p class="row-desc">Instagram &#64;elsewhere.journal</p>
+              </div>
+              <span class="row-arrow">⟶</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  }
 </div>
